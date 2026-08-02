@@ -1,0 +1,10 @@
+flowchart TB
+    Bundle[Signed + Hardened Strata.app]
+    Bundle --> Host[Host Process]
+    Host --> GPU[Metal via wgpu]
+    Host --> DB[(Session / Cache)]
+    Host --> Wasm[Wasmtime Plugin Instances]
+    Host --> Bridge[Optional Local Authenticated Bridge]
+    Wasm -. no ambient access .-> Files[Filesystem]
+    Wasm -. no ambient access .-> Net[Network]
+    Bridge <--> Tools[External RE Tools]

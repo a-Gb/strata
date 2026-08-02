@@ -1,0 +1,8 @@
+flowchart LR
+    P[WASM Plugin] --> B[Capability Broker]
+    B --> M[Manifest + User Grants]
+    M -->|bounded source ranges| S[Source Service]
+    M -->|typed analysis requests| A[Analysis Service]
+    M -->|validated primitives| V[Scene Validator]
+    M -->|namespaced state| D[Plugin Store]
+    M -. default deny .-> N[Network]

@@ -1,0 +1,26 @@
+{
+  "id": "org.example.strata.pattern-analyzer",
+  "name": "Pattern Analyzer Example",
+  "version": "0.0.0",
+  "publisher": "example",
+  "minimum_host_api": "0.1.0",
+  "component": {
+    "path": "component.wasm",
+    "digest": "UNBUILT"
+  },
+  "plugin_types": ["analyzer"],
+  "capabilities": [
+    "source.metadata",
+    { "source.ranges": { "max_bytes_per_call": 1048576 } },
+    "findings.emit"
+  ],
+  "resources": {
+    "memory_bytes": 67108864,
+    "fuel": 10000000,
+    "wall_time_ms": 1000,
+    "max_output_bytes": 1048576,
+    "max_concurrent_calls": 1
+  },
+  "determinism": "deterministic",
+  "license": "MIT"
+}

@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "source": "fixtures/video/composite-firmware-v1.bin",
+  "output": "output/video/firmware-stratigraphy.mp4",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration_seconds": 5.0,
+  "composition": {
+    "domain": "window",
+    "projection_a": "hilbert",
+    "projection_b": "complexity",
+    "geometry": "voxels",
+    "compare_mode": "morph",
+    "mix": 0.0,
+    "parameters": {
+      "dimensions": "three",
+      "row_width": 64,
+      "curve_order": 4,
+      "aggregation_bytes": 1,
+      "lag": 1,
+      "ngram_order": 3,
+      "window_bytes": 32,
+      "hop_bytes": 1,
+      "bit_plane": 0,
+      "word_bits": 32,
+      "little_endian": true,
+      "alignment_stride": 16,
+      "alignment_max_stride": 128,
+      "recurrence_window": 16,
+      "recurrence_search_bytes": 4096,
+      "recurrence_candidate_budget": 64,
+      "recurrence_threshold_percent": 75,
+      "spectrum_window": 64,
+      "spectrum_bins": 32,
+      "hierarchy_max_depth": 6,
+      "hierarchy_min_block": 64,
+      "hierarchy_threshold_percent": 18
+    },
+    "channels": {
+      "color": "address",
+      "height": "entropy",
+      "size": "change_rate",
+      "opacity": "uniform"
+    },
+    "overlays": {
+      "selection": true,
+      "regions": false
+    }
+  },
+  "stride": 1,
+  "point_budget": 20000,
+  "point_size": 2.4,
+  "brightness": 1.32,
+  "perspective": 0.55,
+  "background": [
+    3,
+    6,
+    10
+  ],
+  "show_guides": true,
+  "look": {
+    "palette": "cividis",
+    "primitive": "voxel",
+    "contrast": 0.96,
+    "saturation": 0.92,
+    "vignette": 0.12,
+    "guide_opacity": 0.08
+  },
+  "easing": "smooth_step",
+  "overwrite": true,
+  "keyframes": [
+    {
+      "at": 0.0,
+      "morph": 0.0,
+      "yaw": -0.48,
+      "pitch": 0.32,
+      "zoom": 0.9
+    },
+    {
+      "at": 0.22,
+      "morph": 0.35,
+      "yaw": 0.62,
+      "pitch": 0.16,
+      "zoom": 1.04
+    },
+    {
+      "at": 0.5,
+      "morph": 1.6,
+      "yaw": 1.72,
+      "pitch": -0.08,
+      "zoom": 1.16
+    },
+    {
+      "at": 0.76,
+      "morph": 3.0,
+      "yaw": 3.02,
+      "pitch": 0.24,
+      "zoom": 1.04
+    },
+    {
+      "at": 1.0,
+      "morph": 0.0,
+      "yaw": 5.8,
+      "pitch": 0.32,
+      "zoom": 0.9
+    }
+  ]
+}

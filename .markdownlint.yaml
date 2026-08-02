@@ -1,0 +1,11 @@
+default: true
+
+# Analytical tables and contract examples are intentionally wider than prose.
+MD013: false
+
+# Repeated workflow/acceptance headings are valid beneath distinct scenarios.
+MD024:
+  siblings_only: true
+
+MD004:
+  style: dash

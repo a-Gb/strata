@@ -1,0 +1,26 @@
+[package]
+name = "strata-app-macos"
+description = "Apple Silicon macOS host for the Strata binary visual analysis workbench."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+strata-core.workspace = true
+strata-source.workspace = true
+strata-provenance.workspace = true
+strata-analysis.workspace = true
+strata-gpu.workspace = true
+strata-render.workspace = true
+strata-views.workspace = true
+strata-ui.workspace = true
+strata-session.workspace = true
+strata-plugin-host.workspace = true
+strata-export.workspace = true
+strata-observability.workspace = true
+strata-workbench.workspace = true

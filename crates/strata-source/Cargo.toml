@@ -1,0 +1,15 @@
+[package]
+name = "strata-source"
+description = "Immutable bounded byte-source interfaces and local-file implementations."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sha2.workspace = true
+strata-core.workspace = true

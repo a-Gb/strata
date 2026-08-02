@@ -1,0 +1,16 @@
+[package]
+name = "strata-ui"
+description = "Typed UI commands and workbench layout contracts."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+strata-core.workspace = true
+strata-session.workspace = true
+strata-views.workspace = true

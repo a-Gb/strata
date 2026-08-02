@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/provenance.schema.json",
+  "title": "Strata Provenance Node",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["token", "kind", "semantics_id", "parameters", "inputs"],
+  "properties": {
+    "token": { "type": "string" },
+    "kind": { "enum": ["source", "ranges", "transform", "analyzer", "sampling", "artifact", "view", "evidence", "export"] },
+    "semantics_id": { "type": "string" },
+    "parameters": { "type": "object" },
+    "inputs": { "type": "array", "items": { "type": "string" } },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

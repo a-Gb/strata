@@ -1,0 +1,11 @@
+flowchart LR
+    S[Source Snapshot] --> R[Byte Range Set]
+    R --> T[Transform DAG]
+    T --> A[Analyzer + Parameters]
+    A --> Q[Sampling / Precision]
+    Q --> O[Typed Artifact]
+    O --> V[View Specification]
+    V --> P[Pixel / Point / Voxel / Label]
+    P --> K[Pick Mapping]
+    K --> R
+    V --> E[Evidence / Export]

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "source": "target/debug/strata-poc",
+  "output": "output/video/macho-binary-climate-self-portrait.mp4",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration_seconds": 8.0,
+  "stride": 1,
+  "point_budget": 32000,
+  "point_size": 1.45,
+  "brightness": 1.5,
+  "perspective": 0.66,
+  "background": [0, 1, 5],
+  "show_guides": false,
+  "easing": "smooth_step",
+  "overwrite": true,
+  "keyframes": [
+    { "at": 0.0, "morph": 0.0, "yaw": -0.75, "pitch": 0.45, "zoom": 0.56, "focus_offset": 21007534 },
+    { "at": 0.12, "morph": 0.0, "yaw": 0.0, "pitch": 0.25, "zoom": 0.72, "focus_offset": 21007534 },
+    { "at": 0.28, "morph": 1.0, "yaw": 1.2, "pitch": -0.08, "zoom": 0.95, "focus_offset": 21007534 },
+    { "at": 0.48, "morph": 2.0, "yaw": 2.45, "pitch": 0.48, "zoom": 1.1, "focus_offset": 21007534 },
+    { "at": 0.62, "morph": 2.5, "yaw": 3.25, "pitch": 0.75, "zoom": 1.4, "focus_offset": 21007534 },
+    { "at": 0.78, "morph": 3.0, "yaw": 4.1, "pitch": 1.05, "zoom": 2.6, "focus_offset": 21007534 },
+    { "at": 0.9, "morph": 3.0, "yaw": 4.9, "pitch": 1.28, "zoom": 4.2, "focus_offset": 21007534 },
+    { "at": 1.0, "morph": 3.0, "yaw": 5.55, "pitch": 0.85, "zoom": 1.35, "focus_offset": 21007534 }
+  ]
+}

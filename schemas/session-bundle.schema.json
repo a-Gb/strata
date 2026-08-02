@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/session-bundle.schema.json",
+  "title": "Strata Source-Free Session Bundle Manifest v1",
+  "description": "The manifest.json contract for the bounded Strata POC session bundle. The adjacent journal.ndjson is validated by the runtime against journal_sha256 and journal_event_count.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "source",
+    "workspace",
+    "journal_sha256",
+    "journal_event_count"
+  ],
+  "properties": {
+    "schema": {
+      "const": "strata-session-bundle"
+    },
+    "version": {
+      "const": 1
+    },
+    "source": {
+      "$ref": "#/$defs/sourceFingerprint"
+    },
+    "workspace": {
+      "description": "Opaque JSON workspace state. Its interpretation belongs to the owning workbench, not this bundle contract."
+    },
+    "journal_sha256": {
+      "description": "Lowercase hexadecimal SHA-256 of the exact journal.ndjson bytes.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "journal_event_count": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "sourceFingerprint": {
+      "description": "Identity metadata only. It deliberately excludes a source path, URL, bookmark, and source bytes.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alias", "byte_length", "sha256"],
+      "properties": {
+        "alias": {
+          "type": "string",
+          "allOf": [
+            { "minLength": 1 },
+            { "pattern": ".*\\S.*" },
+            { "pattern": "^[^/\\\\]+$" }
+          ]
+        },
+        "byte_length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "description": "Lowercase hexadecimal SHA-256 of the external source bytes.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

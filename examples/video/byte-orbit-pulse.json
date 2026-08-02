@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "source": "demo://composite-firmware",
+  "output": "output/video/byte-orbit-pulse.mp4",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration_seconds": 4.0,
+  "stride": 2,
+  "point_budget": 16000,
+  "point_size": 2.1,
+  "brightness": 1.4,
+  "perspective": 0.9,
+  "background": [0, 0, 0],
+  "show_guides": true,
+  "easing": "smooth_step",
+  "overwrite": false,
+  "keyframes": [
+    { "at": 0.0, "morph": 1.0, "yaw": -0.72, "pitch": 0.2, "zoom": 0.78 },
+    { "at": 0.5, "morph": 1.0, "yaw": 2.4215927, "pitch": -0.25, "zoom": 1.24 },
+    { "at": 1.0, "morph": 1.0, "yaw": 5.5631853, "pitch": 0.2, "zoom": 0.78 }
+  ]
+}

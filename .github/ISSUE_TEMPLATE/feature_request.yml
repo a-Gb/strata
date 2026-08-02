@@ -1,0 +1,30 @@
+name: Feature proposal
+description: Propose an analytical view, workflow, format, or extension point.
+title: "proposal: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: investigation
+    attributes:
+      label: Investigation need
+      description: What question about binary data should this help answer?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Proposed evidence model
+      description: Explain the source ranges, transform, sampling, and possible false interpretations.
+    validations:
+      required: true
+  - type: textarea
+    id: interaction
+    attributes:
+      label: Proposed interaction
+      description: Describe controls, linked selections, 2D alternatives, and accessibility needs.
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Reproducible fixture
+      description: Suggest a tiny synthetic or legally redistributable example and its expected properties.

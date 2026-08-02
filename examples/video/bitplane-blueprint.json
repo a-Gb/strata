@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "source": "fixtures/video/bitplane-image-v1.bin",
+  "output": "output/video/bitplane-blueprint.mp4",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration_seconds": 5.0,
+  "composition": {
+    "domain": "byte",
+    "projection_a": "address_raster",
+    "projection_b": "bitplanes",
+    "geometry": "voxels",
+    "compare_mode": "morph",
+    "mix": 0.0,
+    "parameters": {
+      "dimensions": "three",
+      "row_width": 32,
+      "curve_order": 4,
+      "aggregation_bytes": 1,
+      "lag": 1,
+      "ngram_order": 3,
+      "window_bytes": 16,
+      "hop_bytes": 1,
+      "bit_plane": 0,
+      "word_bits": 32,
+      "little_endian": true,
+      "alignment_stride": 16,
+      "alignment_max_stride": 128,
+      "recurrence_window": 16,
+      "recurrence_search_bytes": 4096,
+      "recurrence_candidate_budget": 64,
+      "recurrence_threshold_percent": 75,
+      "spectrum_window": 64,
+      "spectrum_bins": 32,
+      "hierarchy_max_depth": 6,
+      "hierarchy_min_block": 64,
+      "hierarchy_threshold_percent": 18
+    },
+    "channels": {
+      "color": "value",
+      "height": "none",
+      "size": "uniform",
+      "opacity": "uniform"
+    },
+    "overlays": {
+      "selection": true,
+      "regions": false
+    }
+  },
+  "stride": 1,
+  "point_budget": 20000,
+  "point_size": 1.35,
+  "brightness": 1.1,
+  "perspective": 0.48,
+  "background": [
+    2,
+    5,
+    9
+  ],
+  "show_guides": false,
+  "look": {
+    "palette": "monochrome",
+    "primitive": "voxel",
+    "contrast": 1.18,
+    "saturation": 0.32,
+    "vignette": 0.18,
+    "guide_opacity": 0.0
+  },
+  "easing": "smooth_step",
+  "overwrite": true,
+  "keyframes": [
+    {
+      "at": 0.0,
+      "morph": 0.0,
+      "yaw": -0.36,
+      "pitch": 0.04,
+      "zoom": 0.78
+    },
+    {
+      "at": 0.3,
+      "morph": 0.45,
+      "yaw": 0.64,
+      "pitch": 0.16,
+      "zoom": 0.96
+    },
+    {
+      "at": 0.58,
+      "morph": 2.1,
+      "yaw": 1.84,
+      "pitch": -0.1,
+      "zoom": 1.1
+    },
+    {
+      "at": 0.82,
+      "morph": 3.0,
+      "yaw": 3.78,
+      "pitch": 0.2,
+      "zoom": 0.94
+    },
+    {
+      "at": 1.0,
+      "morph": 3.0,
+      "yaw": 5.92,
+      "pitch": 0.32,
+      "zoom": 0.78
+    }
+  ]
+}

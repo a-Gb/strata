@@ -1,0 +1,80 @@
+[workspace]
+resolver = "3"
+members = [
+  "crates/strata-core",
+  "crates/strata-source",
+  "crates/strata-provenance",
+  "crates/strata-analysis",
+  "crates/strata-runtime",
+  "crates/strata-gpu",
+  "crates/strata-render",
+  "crates/strata-views",
+  "crates/strata-ui",
+  "crates/strata-session",
+  "crates/strata-plugin-api",
+  "crates/strata-plugin-host",
+  "crates/strata-export",
+  "crates/strata-observability",
+  "crates/strata-app-macos",
+  "crates/strata-cli",
+  "crates/strata-test-support",
+  "crates/strata-poc",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/a-Gb/strata"
+homepage = "https://github.com/a-Gb/strata"
+publish = false
+
+[workspace.dependencies]
+eframe = { version = "=0.35.0", default-features = false, features = ["accesskit", "default_fonts", "wgpu"] }
+image = { version = "=0.25.9", default-features = false, features = ["png"] }
+pollster = "=0.4.0"
+rfd = "=0.17.2"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+sha2 = "=0.10.9"
+wgpu = "=29.0.4"
+
+strata-analysis = { path = "crates/strata-analysis", version = "=0.1.0" }
+strata-core = { path = "crates/strata-core", version = "=0.1.0" }
+strata-export = { path = "crates/strata-export", version = "=0.1.0" }
+strata-gpu = { path = "crates/strata-gpu", version = "=0.1.0" }
+strata-observability = { path = "crates/strata-observability", version = "=0.1.0" }
+strata-plugin-api = { path = "crates/strata-plugin-api", version = "=0.1.0" }
+strata-plugin-host = { path = "crates/strata-plugin-host", version = "=0.1.0" }
+strata-provenance = { path = "crates/strata-provenance", version = "=0.1.0" }
+strata-render = { path = "crates/strata-render", version = "=0.1.0" }
+strata-runtime = { path = "crates/strata-runtime", version = "=0.1.0" }
+strata-session = { path = "crates/strata-session", version = "=0.1.0" }
+strata-source = { path = "crates/strata-source", version = "=0.1.0" }
+strata-test-support = { path = "crates/strata-test-support", version = "=0.1.0" }
+strata-ui = { path = "crates/strata-ui", version = "=0.1.0" }
+strata-views = { path = "crates/strata-views", version = "=0.1.0" }
+strata-workbench = { package = "strata-poc", path = "crates/strata-poc", version = "=0.1.0" }
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+# Keep the ordinary release profile quick for local iteration. Distribution
+# artifacts opt into slower whole-program optimization and symbol stripping.
+[profile.dist]
+inherits = "release"
+codegen-units = 1
+lto = "thin"
+panic = "abort"
+strip = "symbols"

@@ -1,0 +1,104 @@
+package strata:plugin@0.1.0;
+
+interface types {
+    record byte-range {
+        start: u64,
+        end: u64,
+    }
+
+    record source-ref {
+        handle: u64,
+        source-id: string,
+        generation: u64,
+        length: option<u64>,
+    }
+
+    enum exactness {
+        exact,
+        bounded-approximation,
+        sampled,
+        heuristic,
+    }
+
+    record finding {
+        kind: string,
+        label: string,
+        ranges: list<byte-range>,
+        confidence-basis: string,
+        attributes-json: string,
+    }
+
+    record point3 {
+        x: float32,
+        y: float32,
+        z: float32,
+        weight: float32,
+        pick-key: u64,
+    }
+
+    variant scene-primitive {
+        points(list<point3>),
+        rectangles(list<tuple<float32, float32, float32, float32, u64>>),
+        lines(list<tuple<float32, float32, float32, float32, float32, float32, u64>>),
+        labels(list<tuple<string, float32, float32, float32>>),
+        scalar-tile(tuple<string, float32, float32, float32, float32>),
+    }
+
+    record scene {
+        primitives: list<scene-primitive>,
+        legend-json: string,
+        warnings: list<string>,
+    }
+
+    variant plugin-output {
+        findings(list<finding>),
+        scene(scene),
+        json(string),
+        binary(tuple<string, list<u8>>),
+    }
+
+    variant plugin-error {
+        invalid-input(string),
+        unsupported(string),
+        resource-limit(string),
+        cancelled,
+        internal(string),
+    }
+}
+
+interface host-source {
+    use types.{byte-range, source-ref};
+
+    metadata: func(source: source-ref) -> result<string, string>;
+    read-ranges: func(source: source-ref, ranges: list<byte-range>, max-bytes: u64) -> result<list<u8>, string>;
+}
+
+interface host-analysis {
+    use types.{byte-range, source-ref};
+
+    request: func(
+        source: source-ref,
+        ranges: list<byte-range>,
+        analyzer-id: string,
+        parameters-json: string,
+        sampling-json: string,
+    ) -> result<string, string>;
+
+    get-artifact: func(artifact-handle: string, offset: u64, max-bytes: u64) -> result<list<u8>, string>;
+}
+
+interface plugin {
+    use types.{plugin-error, plugin-output, source-ref};
+
+    initialize: func(host-api-version: string, granted-capabilities-json: string) -> result<string, plugin-error>;
+    invoke: func(operation: string, source: option<source-ref>, input-json: string) -> result<list<plugin-output>, plugin-error>;
+    checkpoint: func() -> result<list<u8>, plugin-error>;
+    restore: func(state: list<u8>) -> result<_, plugin-error>;
+    shutdown: func();
+}
+
+world strata-plugin {
+    import host-source;
+    import host-analysis;
+    export plugin;
+}

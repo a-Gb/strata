@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://strata.local/schemas/projection-composition.schema.json",
+  "title": "Strata Projection Composition v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "domain",
+    "projection_a",
+    "projection_b",
+    "geometry",
+    "compare_mode",
+    "mix",
+    "parameters",
+    "channels",
+    "overlays"
+  ],
+  "properties": {
+    "domain": { "enum": ["byte", "word", "window", "region"] },
+    "projection_a": { "$ref": "#/$defs/projection" },
+    "projection_b": { "$ref": "#/$defs/projection" },
+    "geometry": { "enum": ["points", "path", "voxels", "surface"] },
+    "compare_mode": { "enum": ["single", "split", "overlay", "morph"] },
+    "mix": { "type": "number", "minimum": 0, "maximum": 1 },
+    "parameters": { "$ref": "#/$defs/parameters" },
+    "channels": { "$ref": "#/$defs/channels" },
+    "overlays": { "$ref": "#/$defs/overlays" }
+  },
+  "$defs": {
+    "projection": {
+      "enum": [
+        "address_raster",
+        "hilbert",
+        "transitions",
+        "bitplanes",
+        "complexity",
+        "sections",
+        "alignment_lattice",
+        "recurrence_plane",
+        "repetition_skyline",
+        "spectral_waterfall",
+        "hamming_hypercube",
+        "hierarchical_block_volume",
+        "polar_address_path",
+        "helical_address_path"
+      ]
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimensions",
+        "row_width",
+        "curve_order",
+        "aggregation_bytes",
+        "lag",
+        "ngram_order",
+        "window_bytes",
+        "hop_bytes",
+        "bit_plane",
+        "word_bits",
+        "little_endian"
+      ],
+      "properties": {
+        "dimensions": { "enum": ["two", "three"] },
+        "row_width": { "type": "integer", "minimum": 4, "maximum": 4096 },
+        "curve_order": { "type": "integer", "minimum": 2, "maximum": 8 },
+        "aggregation_bytes": { "type": "integer", "minimum": 1, "maximum": 1048576 },
+        "lag": { "type": "integer", "minimum": 1, "maximum": 1024 },
+        "ngram_order": { "enum": [2, 3] },
+        "window_bytes": { "type": "integer", "minimum": 4, "maximum": 1048576 },
+        "hop_bytes": { "type": "integer", "minimum": 1, "maximum": 1048576 },
+        "bit_plane": { "type": "integer", "minimum": 0, "maximum": 7 },
+        "word_bits": { "enum": [8, 16, 32, 64] },
+        "little_endian": { "type": "boolean" },
+        "alignment_stride": { "type": "integer", "minimum": 1, "maximum": 4096 },
+        "alignment_max_stride": { "type": "integer", "minimum": 2, "maximum": 4096 },
+        "recurrence_window": { "type": "integer", "minimum": 4, "maximum": 4096 },
+        "recurrence_search_bytes": { "type": "integer", "minimum": 4, "maximum": 16777216 },
+        "recurrence_candidate_budget": { "type": "integer", "minimum": 1, "maximum": 4096 },
+        "recurrence_threshold_percent": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "spectrum_window": { "type": "integer", "minimum": 8, "maximum": 4096 },
+        "spectrum_bins": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "hierarchy_max_depth": { "type": "integer", "minimum": 0, "maximum": 16 },
+        "hierarchy_min_block": { "type": "integer", "minimum": 8, "maximum": 16777216 },
+        "hierarchy_threshold_percent": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "channels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["color", "height", "size", "opacity"],
+      "properties": {
+        "color": { "enum": ["address", "entropy", "value"] },
+        "height": { "enum": ["none", "entropy", "change_rate"] },
+        "size": { "enum": ["uniform", "entropy", "change_rate"] },
+        "opacity": { "enum": ["uniform", "selection_context"] }
+      }
+    },
+    "overlays": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection", "regions"],
+      "properties": {
+        "selection": { "type": "boolean" },
+        "regions": { "type": "boolean" }
+      }
+    }
+  }
+}

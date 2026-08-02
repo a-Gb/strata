@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ideas and format research
+    url: https://github.com/a-Gb/strata/discussions
+    about: Discuss broad ideas before turning them into a focused proposal.
+  - name: Private security report
+    url: https://github.com/a-Gb/strata/security/advisories/new
+    about: Report vulnerabilities or sensitive security findings privately.

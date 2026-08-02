@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/bridge-message.schema.json",
+  "title": "Strata Local Bridge JSON-RPC Message",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": { "const": "2.0" },
+        "id": { "type": ["string", "integer"] },
+        "method": { "type": "string" },
+        "params": { "type": "object" },
+        "idempotency_key": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["jsonrpc", "id"],
+      "properties": {
+        "jsonrpc": { "const": "2.0" },
+        "id": { "type": ["string", "integer"] },
+        "result": {},
+        "error": {
+          "type": "object",
+          "required": ["code", "message", "data"],
+          "properties": {
+            "code": { "type": "integer" },
+            "message": { "type": "string" },
+            "data": {
+              "type": "object",
+              "required": ["name", "retryable"],
+              "properties": {
+                "name": { "type": "string" },
+                "retryable": { "type": "boolean" },
+                "detail": { "type": "object" }
+              }
+            }
+          }
+        }
+      },
+      "oneOf": [{ "required": ["result"] }, { "required": ["error"] }],
+      "additionalProperties": false
+    }
+  ]
+}

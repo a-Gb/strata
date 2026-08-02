@@ -1,0 +1,54 @@
+{
+  "schema": "strata.video-fixtures/v1",
+  "license": "CC0-1.0 (synthetic)",
+  "generator": "cargo run -p strata-test-support --example write_video_fixtures",
+  "fixtures": [
+    {
+      "path": "fixtures/video/composite-firmware-v1.bin",
+      "bytes": 1024,
+      "sha256": "8b81fe044f4d484d04f2ce9c7190910ec91a6eb270d295f996f4b56f3b7006fc",
+      "preset": "firmware-stratigraphy",
+      "expected": [
+        "0..256 erased-flash padding",
+        "256..512 repeated diagnostic text",
+        "512..768 little-endian 8-byte table records",
+        "768..1024 deterministic high-complexity payload"
+      ]
+    },
+    {
+      "path": "fixtures/video/investigation-xor-v1.bin",
+      "bytes": 1536,
+      "sha256": "f1cd874327ec7ee924e9df0693ac735d4891ac4c1df877a30712951986219e54",
+      "preset": "xor-correlation-reveal",
+      "expected": [
+        "64..320 fixed-width table",
+        "320..576 structured calibration records",
+        "576..832 exact XOR-0xa7 copy of 320..576",
+        "1088..1344 repeated 16-byte motif"
+      ]
+    },
+    {
+      "path": "fixtures/video/interleaved-sensor-v1.bin",
+      "bytes": 2304,
+      "sha256": "6c3b6dc9c6116036a85734ea18f33a7a068c4278798a637da72499ee23f960c3",
+      "preset": "interleave-lattice",
+      "expected": [
+        "24 by 16 samples",
+        "three little-endian 16-bit lanes",
+        "six-byte record stride",
+        "144-byte row stride"
+      ]
+    },
+    {
+      "path": "fixtures/video/bitplane-image-v1.bin",
+      "bytes": 512,
+      "sha256": "61a5b6d81f915df0bcb1b8b93e4d1cde1a2aba295ce4c30109bfe0432a9c5670",
+      "preset": "bitplane-blueprint",
+      "expected": [
+        "32 by 16 grayscale plane",
+        "32-byte row width",
+        "eight source-address-stable bit layers"
+      ]
+    }
+  ]
+}

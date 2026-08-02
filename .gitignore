@@ -1,0 +1,13 @@
+/target/
+/output/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.cdx.json
+*.profraw
+*.spdx.json
+*.strata-cache
+*.strata-session/
+*.strata-project
+/local-fixtures/

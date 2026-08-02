@@ -1,0 +1,17 @@
+[package]
+name = "strata-export"
+description = "Export inventory, redaction, and atomic writer contracts for Strata."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+strata-core.workspace = true
+strata-session.workspace = true
+strata-provenance.workspace = true
+strata-render.workspace = true

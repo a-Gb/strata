@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible Strata defect using safe, redistributable data.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Strata. Do not attach proprietary binaries,
+        credentials, private paths, or live malware.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Provide the smallest deterministic steps and a synthetic fixture if possible.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Strata version or commit
+      placeholder: v0.1.0 or a commit SHA
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: macOS and hardware
+      placeholder: macOS 15.6, Apple M2 Pro
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe supporting evidence
+      description: Add logs, screenshots, fixture digests, or sanitized output.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data safety
+      options:
+        - label: I removed private paths, credentials, proprietary samples, and sensitive bytes.
+          required: true

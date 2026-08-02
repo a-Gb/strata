@@ -1,0 +1,18 @@
+[package]
+name = "strata-plugin-host"
+description = "Capability and quota contracts for a future isolated Strata plugin host."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+strata-core.workspace = true
+strata-source.workspace = true
+strata-analysis.workspace = true
+strata-render.workspace = true
+strata-plugin-api.workspace = true

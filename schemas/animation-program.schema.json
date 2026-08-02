@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://strata.local/schemas/animation-program.schema.json",
+  "title": "Strata Animation Program v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version", "source", "output", "width", "height", "fps",
+    "duration_seconds", "stride", "point_budget", "point_size",
+    "brightness", "perspective", "background", "show_guides",
+    "easing", "overwrite", "keyframes"
+  ],
+  "properties": {
+    "version": { "const": 1 },
+    "source": { "type": "string", "minLength": 1 },
+    "source_range": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "output": { "type": "string", "pattern": "\\.[mM][pP]4$" },
+    "width": { "type": "integer", "minimum": 64, "maximum": 4096, "multipleOf": 2 },
+    "height": { "type": "integer", "minimum": 64, "maximum": 4096, "multipleOf": 2 },
+    "fps": { "type": "integer", "minimum": 1, "maximum": 120 },
+    "duration_seconds": { "type": "number", "minimum": 0.1, "maximum": 120 },
+    "composition": { "$ref": "projection-composition.schema.json" },
+    "stride": { "type": "integer", "minimum": 1, "maximum": 1024 },
+    "point_budget": { "type": "integer", "minimum": 1, "maximum": 1000000 },
+    "point_size": { "type": "number", "minimum": 0.25, "maximum": 16 },
+    "brightness": { "type": "number", "minimum": 0.1, "maximum": 4 },
+    "perspective": { "type": "number", "minimum": 0, "maximum": 1 },
+    "background": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "type": "integer", "minimum": 0, "maximum": 255 }
+    },
+    "show_guides": { "type": "boolean" },
+    "look": { "$ref": "#/$defs/look" },
+    "easing": { "enum": ["linear", "smooth_step"] },
+    "overwrite": { "type": "boolean" },
+    "keyframes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 128,
+      "items": { "$ref": "#/$defs/keyframe" }
+    }
+  },
+  "$defs": {
+    "look": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "palette",
+        "primitive",
+        "contrast",
+        "saturation",
+        "vignette",
+        "guide_opacity"
+      ],
+      "properties": {
+        "palette": { "enum": ["source", "cividis", "cyan_amber", "monochrome"] },
+        "primitive": { "enum": ["disc", "voxel"] },
+        "contrast": { "type": "number", "minimum": 0.5, "maximum": 2 },
+        "saturation": { "type": "number", "minimum": 0, "maximum": 1.5 },
+        "vignette": { "type": "number", "minimum": 0, "maximum": 1 },
+        "guide_opacity": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "keyframe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at", "morph", "yaw", "pitch", "zoom"],
+      "properties": {
+        "at": { "type": "number", "minimum": 0, "maximum": 1 },
+        "morph": { "type": "number", "minimum": 0, "maximum": 3 },
+        "yaw": { "type": "number" },
+        "pitch": { "type": "number", "minimum": -1.48, "maximum": 1.48 },
+        "zoom": { "type": "number", "minimum": 0.2, "maximum": 5 },
+        "focus_offset": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    }
+  }
+}

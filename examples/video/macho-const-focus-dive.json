@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "source": "target/debug/strata-poc",
+  "source_range": { "start": 20993920, "end": 23492132 },
+  "output": "output/video/macho-const-focus-dive.mp4",
+  "width": 960,
+  "height": 540,
+  "fps": 24,
+  "duration_seconds": 4.0,
+  "stride": 1,
+  "point_budget": 18000,
+  "point_size": 1.7,
+  "brightness": 1.4,
+  "perspective": 0.82,
+  "background": [0, 2, 7],
+  "show_guides": true,
+  "easing": "smooth_step",
+  "overwrite": true,
+  "keyframes": [
+    { "at": 0.0, "morph": 0.0, "yaw": -0.5, "pitch": 0.28, "zoom": 0.55, "focus_offset": 21003500 },
+    { "at": 0.25, "morph": 0.4, "yaw": 0.55, "pitch": 0.1, "zoom": 1.05, "focus_offset": 21003500 },
+    { "at": 0.55, "morph": 1.0, "yaw": 1.7, "pitch": -0.2, "zoom": 3.8, "focus_offset": 21003500 },
+    { "at": 0.78, "morph": 1.0, "yaw": 2.5, "pitch": 0.05, "zoom": 4.8, "focus_offset": 21003500 },
+    { "at": 1.0, "morph": 0.2, "yaw": 3.4, "pitch": 0.25, "zoom": 1.2, "focus_offset": 21003500 }
+  ]
+}

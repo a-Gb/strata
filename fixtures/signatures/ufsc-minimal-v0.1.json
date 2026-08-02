@@ -1,0 +1,47 @@
+{
+  "project_name": "UniversalFileSignatureCompendium",
+  "version": "0.1.0",
+  "generated_at": "2026-08-01T00:00:00Z",
+  "signature_count": 5,
+  "signatures": [
+    {
+      "_id": "png",
+      "hex_signatures": ["89 50 4E 47 0D 0A 1A 0A"],
+      "offsets": [{"type": "bof", "value_numeric": 0}],
+      "signature_strength": "medium",
+      "common_names": ["PNG image"],
+      "file_extensions": ["PNG"],
+      "mime_types": ["image/png"],
+      "categories": ["Image"],
+      "sources": [
+        {
+          "source_name": "Synthetic fixture",
+          "source_url": "https://example.test/png",
+          "retrieved_at": "2026-08-01"
+        }
+      ]
+    },
+    {
+      "_id": "riff",
+      "hex_signatures": ["52 49 46 46 ?? 57 41 56 45"],
+      "offsets": [{"type": "fixed", "value_numeric": 16}],
+      "common_names": ["RIFF family"],
+      "sources": []
+    },
+    {
+      "_id": "container",
+      "hex_signatures": ["50 4B 03 04"],
+      "offsets": [{"type": "variable", "value_string": "container=ZIP"}]
+    },
+    {
+      "_id": "missing",
+      "hex_signatures": [],
+      "offsets": [{"type": "bof", "value_numeric": 0}]
+    },
+    {
+      "_id": "ambiguous",
+      "hex_signatures": ["AA BB", "CC DD"],
+      "offsets": [{"type": "bof", "value_numeric": 0}]
+    }
+  ]
+}

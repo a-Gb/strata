@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/view-preset.schema.json",
+  "title": "Strata View Preset",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["id", "kind", "version", "source_binding", "camera", "parameters", "quality"],
+  "properties": {
+    "id": { "type": "string" },
+    "kind": { "type": "string" },
+    "version": { "type": "string" },
+    "source_binding": { "type": "string" },
+    "transform_binding": { "type": ["string", "null"] },
+    "analysis_bindings": { "type": "array", "items": { "type": "string" } },
+    "camera": { "type": "object" },
+    "parameters": { "type": "object" },
+    "projection_composition": { "$ref": "projection-composition.schema.json" },
+    "palette": { "type": ["object", "null"] },
+    "filters": { "type": "array", "items": { "type": "object" } },
+    "linked_group": { "type": ["string", "null"] },
+    "quality": { "enum": ["interactive", "balanced", "exact_visible", "export"] }
+  }
+}

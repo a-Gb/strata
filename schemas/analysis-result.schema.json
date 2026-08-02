@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/analysis-result.schema.json",
+  "title": "Strata Analysis Result Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact_id", "source_id", "generation", "covered_ranges", "exactness", "completeness", "sampling", "analyzer", "provenance_root", "payload"],
+  "properties": {
+    "artifact_id": { "type": "string" },
+    "source_id": { "type": "string" },
+    "generation": { "type": "integer", "minimum": 0 },
+    "covered_ranges": { "type": "array", "items": { "type": "object", "required": ["start", "end"], "properties": { "start": { "type": "integer" }, "end": { "type": "integer" } } } },
+    "exactness": { "enum": ["exact", "bounded_approximation", "sampled", "heuristic"] },
+    "completeness": { "enum": ["partial", "refined", "complete"] },
+    "sampling": { "type": "object" },
+    "analyzer": { "type": "object", "required": ["id", "version", "semantics_version"] },
+    "provenance_root": { "type": "string" },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "metrics": { "type": "object" },
+    "payload": { "type": "object" }
+  }
+}

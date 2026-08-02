@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant UI
+    participant Source
+    participant Planner
+    participant Worker as CPU/GPU Worker
+    participant Cache
+    participant View
+    participant Prov as Provenance
+    UI->>Source: snapshot/read capability
+    UI->>Planner: visible analysis demand
+    Planner->>Cache: lookup semantic key
+    alt cache miss
+      Planner->>Worker: bounded job + generation
+      Worker->>Source: range reads
+      Worker-->>Cache: partial/refined artifact
+      Worker-->>Prov: dependency record
+    end
+    Cache-->>View: immutable artifact handle
+    View-->>UI: scene fragment + pick mappings

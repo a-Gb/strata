@@ -1,0 +1,12 @@
+flowchart TB
+    User[Analyst]
+    Sources[(Files / images / streams / snapshots)]
+    Strata[Strata macOS Workbench]
+    Plugins[WASM Component Plugins]
+    Tools[Ghidra / rizin / LLDB / scripts]
+    Outputs[(Session / evidence / data / images / ranges)]
+    User --> Strata
+    Sources --> Strata
+    Plugins --> Strata
+    Strata <--> Tools
+    Strata --> Outputs

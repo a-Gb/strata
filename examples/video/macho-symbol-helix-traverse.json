@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "source": "target/debug/strata-poc",
+  "source_range": { "start": 50900000, "end": 51350000 },
+  "output": "output/video/macho-symbol-helix-traverse.mp4",
+  "width": 960,
+  "height": 540,
+  "fps": 24,
+  "duration_seconds": 5.0,
+  "stride": 1,
+  "point_budget": 18000,
+  "point_size": 1.55,
+  "brightness": 1.45,
+  "perspective": 0.76,
+  "background": [2, 2, 6],
+  "show_guides": false,
+  "easing": "smooth_step",
+  "overwrite": true,
+  "keyframes": [
+    { "at": 0.0, "morph": 2.0, "yaw": -0.8, "pitch": 0.68, "zoom": 0.62, "focus_offset": 51095305 },
+    { "at": 0.25, "morph": 2.0, "yaw": 0.65, "pitch": 0.18, "zoom": 1.2, "focus_offset": 51144863 },
+    { "at": 0.55, "morph": 2.0, "yaw": 2.25, "pitch": -0.3, "zoom": 3.6, "focus_offset": 51144863 },
+    { "at": 0.78, "morph": 2.0, "yaw": 3.85, "pitch": -0.55, "zoom": 2.4, "focus_offset": 51272538 },
+    { "at": 1.0, "morph": 2.0, "yaw": 5.4831853, "pitch": 0.55, "zoom": 1.0, "focus_offset": 51272538 }
+  ]
+}

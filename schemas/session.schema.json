@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/session.schema.json",
+  "title": "Strata Session Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "session_id", "sources", "views", "selections", "evidence", "plugins"],
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "application_semantics_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "modified_at": { "type": "string", "format": "date-time" },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceReference" }
+    },
+    "views": {
+      "type": "array",
+      "items": { "$ref": "view-preset.schema.json" }
+    },
+    "selections": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/selection" }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "evidence.schema.json" }
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "version", "component_digest", "grants"],
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" },
+          "component_digest": { "type": "string" },
+          "grants": { "type": "array", "items": { "type": "object" } },
+          "opaque_state": { "type": ["object", "null"] }
+        }
+      }
+    },
+    "workspace": { "type": "object" },
+    "redaction_policy": { "type": "object" }
+  },
+  "$defs": {
+    "byteRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "generation", "length", "digest_state", "address_spaces"],
+      "properties": {
+        "id": { "type": "string" },
+        "alias": { "type": "string" },
+        "generation": { "type": "integer", "minimum": 0 },
+        "length": { "type": ["integer", "null"], "minimum": 0 },
+        "digest_algorithm": { "type": ["string", "null"] },
+        "digest": { "type": ["string", "null"] },
+        "digest_state": { "enum": ["unknown", "provisional", "sealed", "failed"] },
+        "authorized_reference": { "type": ["object", "null"] },
+        "address_spaces": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_id", "generation", "address_space", "ranges", "coverage", "role"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "source_id": { "type": "string" },
+        "generation": { "type": "integer", "minimum": 0 },
+        "address_space": { "type": "string" },
+        "ranges": { "type": "array", "items": { "$ref": "#/$defs/byteRange" } },
+        "coverage": { "enum": ["exact_contiguous", "exact_discontiguous", "sampled", "aggregate", "approximate"] },
+        "role": { "enum": ["primary", "comparison", "exclusion", "evidence", "transient"] },
+        "transform_path": { "type": "array", "items": { "type": "string" } },
+        "origin": { "type": "string" }
+      }
+    }
+  }
+}

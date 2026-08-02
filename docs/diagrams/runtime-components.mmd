@@ -1,0 +1,19 @@
+flowchart LR
+    AppKit[AppKit Host] --> UI[Workbench UI]
+    UI --> Bus[Command Bus]
+    Bus --> Session[Session Reducer]
+    Bus --> Sources[Source Manager]
+    Bus --> Scheduler[Analysis Scheduler]
+    Sources --> Scheduler
+    Scheduler --> CPU[CPU Reference]
+    Scheduler --> GPU[wgpu Compute / Metal]
+    CPU --> Cache[Artifact Cache]
+    GPU --> Cache
+    Cache --> Views[View Graph]
+    Views --> Renderer[wgpu Renderer]
+    Renderer --> Pick[Picking]
+    Pick --> Session
+    Plugins[Wasmtime Host] --> Scheduler
+    Plugins --> Views
+    Session --> Provenance[Provenance / Evidence]
+    Cache --> Provenance

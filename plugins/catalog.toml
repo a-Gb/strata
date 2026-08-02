@@ -1,0 +1,52 @@
+# First-party package catalog. The current host does not execute external plugin
+# components; these entries reserve stable identities and intended release stages.
+
+[[plugin]]
+id = "strata.builtin.byte-atlas"
+stage = "mvp"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.entropy"
+stage = "mvp"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.digram"
+stage = "mvp"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.trigram"
+stage = "advanced"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.layered-digram"
+stage = "core"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.bitplane"
+stage = "core"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.periodicity"
+stage = "core"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.diff"
+stage = "core"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.strings"
+stage = "mvp"
+trust_tier = 0
+
+[[plugin]]
+id = "strata.builtin.signatures"
+stage = "mvp"
+trust_tier = 0

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.strata.local/local-project.schema.json",
+  "title": "Strata Local Project Locator",
+  "description": "Local paths that bind a source-free session to a digest-verified source and optional signature pack.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "version", "session_bundle", "source"],
+  "properties": {
+    "kind": { "const": "strata_local_project" },
+    "version": { "const": 1 },
+    "session_bundle": { "$ref": "#/$defs/locator" },
+    "source": { "$ref": "#/$defs/locator" },
+    "signature_pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/locator" },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "locator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192,
+      "pattern": "^[^\\u0000\\r\\n]+$"
+    }
+  }
+}
