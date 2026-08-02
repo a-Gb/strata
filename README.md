@@ -1,251 +1,162 @@
 # Strata
 
-![Strata application icon](docs/assets/strata-icon.png)
-
-[![Release](https://img.shields.io/github/v/release/a-Gb/strata?display_name=tag&include_prereleases&sort=semver)](https://github.com/a-Gb/strata/releases/tag/v0.1.0)
-[![Downloads](https://img.shields.io/github/downloads/a-Gb/strata/total)](https://github.com/a-Gb/strata/releases)
+[![Release](https://img.shields.io/github/v/release/a-Gb/strata?display_name=tag&include_prereleases&sort=semver)](https://github.com/a-Gb/strata/releases)
 ![Platform](https://img.shields.io/badge/macOS-15%2B-black?logo=apple)
-![Architecture](https://img.shields.io/badge/Apple%20Silicon-arm64-0b7285)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-2f9e44)](#license)
-![Status](https://img.shields.io/badge/status-pre--alpha-f08c00)
+[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
 
-**A GPU-assisted visual workbench for understanding binary data.**
+**Map raw binary data into linked visual evidence.**
 
-Strata turns raw bytes into linked maps, transition fields, statistical spaces,
-bit planes, section layouts, and 3D projections. Click a visual feature and
-Strata takes you back to the exact source-byte range and the transform that
-produced it.
+Strata is a GPU-assisted investigation workbench for binary data. Select a
+string, repeated block, signature, statistical boundary, pixel, or voxel and
+trace it back to its exact source-byte range and analytical provenance.
 
-It is designed for data discovery, format research, firmware exploration,
-reverse engineering, comparison, and explainable visual communication—not for
-automatically declaring a file safe, malicious, encrypted, or compressed.
-
-![Strata workbench showing a linked Hilbert and complexity projection](docs/assets/strata-workbench.jpg)
+![Strata workbench showing a linked binary investigation](docs/assets/strata-workbench.jpg)
 
 ## Download
 
 **[Download Strata 0.1.0 for Apple Silicon](https://github.com/a-Gb/strata/releases/download/v0.1.0/Strata-0.1.0-arm64.dmg)**
 
-Requirements:
+Strata 0.1.0 is a public pre-alpha preview for Apple Silicon Macs running
+macOS 15 or newer.
 
-- Apple Silicon Mac (`arm64`)
-- macOS 15 or newer
-- About 20 MB of free space
+1. Open the DMG and drag **Strata** into **Applications**.
+2. Launch Strata and choose **Open…**.
+3. Select a local binary or start with the bundled demonstration.
 
-Open the DMG, drag **Strata** into **Applications**, then launch it normally.
-The release is hardened, signed with a Developer ID certificate, notarized by
-Apple, and carries a stapled notary ticket.
+Strata does not modify source files or upload them. Checksums and a CycloneDX
+SBOM are available on the
+[v0.1.0 release page](https://github.com/a-Gb/strata/releases/tag/v0.1.0).
 
-To verify the download manually:
+## What can Strata reveal?
+
+| Investigation | Useful evidence |
+|---|---|
+| Locate headers, records, embedded payloads, and structural boundaries | Address maps, entropy changes, regions, strings, and exact signatures |
+| Find repeated or transformed data | Repetition, periodicity, correlation, and reversible XOR candidates |
+| Explore flags, packed fields, interleaving, and byte relationships | Bit planes, transition fields, alignment, and linked 2D/3D projections |
+| Compare binary revisions | Exact changed ranges, matched regions, displacement, and persistent selections |
+
+No individual signal is treated as a verdict. High entropy, for example,
+cannot by itself distinguish compression from encryption. Strata is most useful
+when several independent views converge on the same byte ranges.
+
+## A first investigation
+
+1. Open a file and begin in **Discover** for a bounded whole-artifact survey.
+2. Review candidate strings, repetition, periodicity, signatures, structural
+   changes, and reversible transforms.
+3. Select a finding to inspect its exact offsets, hexadecimal bytes, text
+   rendering, contributors, confidence, and coverage.
+4. Carry the same selection into **Structure**, **Grammar**, **Resonance**,
+   **Interleave**, **Revision diff**, or **3D Lab**.
+5. Save a local `.strata-project` or a portable, source-free
+   `.strata-session` evidence bundle.
+
+## Core capabilities
+
+- **Exact, bidirectional picking:** visual elements and evidence rows map back
+  to exact or explicitly sampled source ranges.
+- **Linked analytical views:** selections persist across discovery, structure,
+  relationship, comparison, and projection workspaces.
+- **Bounded and deterministic analysis:** coverage, sampling, truncation, and
+  unavailable analyzers remain visible instead of being implied away.
+- **Candidate signature knowledge:** strict signature-pack matches preserve
+  exact byte ranges, catalog attribution, and pack digests without asserting a
+  file type.
+- **Reproducible communication:** deterministic video programs, H.264 export,
+  JSON provenance sidecars, and synthetic demonstration fixtures are included.
+- **Metal acceleration where verified:** selected Alignment and Hamming
+  projection coordinates use WGPU compute with CPU differential tests and an
+  explicit fallback.
+
+## Headless analysis
+
+The CLI uses the same bounded runtime and provenance model as the desktop app.
+From a source checkout:
 
 ```bash
-curl -LO https://github.com/a-Gb/strata/releases/download/v0.1.0/Strata-0.1.0-arm64.dmg
-curl -LO https://github.com/a-Gb/strata/releases/download/v0.1.0/Strata-0.1.0-arm64.dmg.sha256
-shasum -a 256 -c Strata-0.1.0-arm64.dmg.sha256
+cargo run -p strata-cli -- analyze fixtures/video/composite-firmware-v1.bin \
+  --preset examples/presets/structure-entropy-fast.json \
+  --range 0x0:0x200 \
+  --output-format json
 ```
 
-The release also includes a checksum-verified CycloneDX SBOM bundle covering
-all 18 workspace crates.
-
-The 0.1.0 release is a pre-alpha preview. Use copies of important files and
-read the [current limitations](docs/20-implementation-status.md) before using
-it in a sensitive workflow.
-
-## Your first investigation
-
-1. Choose **Open…** and select a local file. Strata opens it read-only.
-2. Start in **Discover** to find candidate strings, repetition, periodicity,
-   signatures, structural changes, and reversible XOR relationships.
-3. Move between **Structure**, **Grammar**, **Resonance**, **Interleave**,
-   **Revision diff**, and **3D Lab**. Selections remain linked.
-4. Click a point, voxel, range, or finding to inspect its exact offsets,
-   hexadecimal bytes, text rendering, contributors, and provenance.
-5. Save a private `.strata-project` to reopen local paths and UI state, or a
-   source-free `.strata-session` when you need a portable evidence trail.
-
-Large files are not copied wholesale into memory. Strata uses bounded reads,
-tiled overviews, explicit sampling, and exact focus ranges. The contiguous
-analysis path is currently capped at 64 MiB.
-
-## What Strata helps reveal
-
-| Question | Useful views and evidence |
-|---|---|
-| Where do regions, rows, headers, or embedded payloads begin? | Address raster, Hilbert plane/cube, entropy and region overlays |
-| Is a region text-like, structured, repetitive, packed, or statistically unusual? | Complexity phase space, byte transitions, recurrence, strings, entropy |
-| Does the data contain flags, masks, planar channels, or bit corruption? | Bit-plane stack and Hamming projection |
-| What record width or interleave is plausible? | Alignment lattice, stride relationships, periodicity, spectral evidence |
-| Which blocks repeat or correlate? | Exact repeats, recurrence, correlation, and repetition skyline evidence |
-| Does a region resemble a known signature? | Strict signature-pack candidates with exact match ranges and pack provenance |
-| What changed between two revisions? | Linked diff ranges, matched regions, and revision displacement evidence |
-| How can I explain the finding to someone else? | Persistent selections, evidence notes, deterministic sessions, and programmable video exports |
-
-No single view is treated as a verdict. High entropy, for example, cannot by
-itself distinguish compression from encryption. Strata is strongest when
-several independent views point to the same source range.
-
-## Projection model
-
-Strata separates concepts that many binary visualizers collapse together:
-
-```text
-Binary
-  → sample domain      Byte | Word | Window | Region
-  → projection         Raster | Hilbert | Transition | Phase | Parsed layout
-  → geometry           Points | Path | Voxels | Surface
-  → visual channels    Colour | Height | Size | Opacity | Motion
-  → overlays           Regions | Strings | Signatures | Selection
-```
-
-The default projection families are **Raster**, **Hilbert**,
-**Transitions**, **Bitplanes**, **Complexity**, and **Sections**. Advanced
-work includes alignment, recurrence, spectrum, Hamming space, hierarchy, and
-address paths. Named A/B projections can be viewed as split, overlay, or morph
-while every datum retains stable source contributors.
-
-The core invariant is:
-
-> Rendered datum → source byte range → transform and sampling provenance.
-
-## Privacy and evidence boundaries
-
-- Files are opened read-only and never uploaded.
-- There is no telemetry or cloud-analysis dependency.
-- Portable sessions exclude source bytes and local source paths.
-- Private project locators may contain local paths and are ignored by Git.
-- Signature matches and statistical similarities are presented as candidate
-  evidence, never authoritative file-type or security verdicts.
-- Screenshots and exports can still reveal source-derived structure; review
-  them before sharing.
-
-Strata analyzes attacker-controlled input and is not yet sandboxed or
-independently audited. See [SECURITY.md](SECURITY.md) before examining hostile
-or sensitive material.
+The JSON result excludes source paths and records the source digest, covered
+ranges, preset, and canonical artifact digest.
 
 ## Build from source
 
-The supported development target is Apple Silicon with macOS 15 or newer.
-Install Xcode Command Line Tools, stable Rust, and
-[`just`](https://github.com/casey/just):
-
-```bash
-xcode-select --install
-brew install rustup just
-rustup-init
-```
-
-Clone, validate, and run:
+Requirements: Apple Silicon, macOS 15+, stable Rust 1.85 or newer, Xcode
+Command Line Tools, and [`just`](https://github.com/casey/just).
 
 ```bash
 git clone https://github.com/a-Gb/strata.git
 cd strata
 just check
 just test
-cargo run -p strata-app-macos
+cargo run -p strata-app-macos -- fixtures/video/composite-firmware-v1.bin
 ```
 
-Open a specific file from the command line:
-
-```bash
-cargo run -p strata-app-macos -- /absolute/path/to/source.bin
-```
-
-Build an optimized local app or DMG:
+Build a local app bundle or DMG with:
 
 ```bash
 just package-macos
 just dmg
-open target/artifacts/Strata-0.1.0-arm64.dmg
 ```
 
-Local packages are ad-hoc signed by default. Maintainer-only Developer ID and
-notarization steps are documented in
+Local packages are ad-hoc signed by default. Maintainer signing and
+notarization are documented in
 [packaging/macos/README.md](packaging/macos/README.md).
 
-## Headless analysis
+## Current scope
 
-The CLI uses the same bounded runtime and provenance model as the desktop app:
+Strata is an analytical pre-alpha, not a malware classifier, antivirus engine,
+or supported forensic product.
 
-```bash
-cargo run -p strata-cli -- analyze Cargo.toml \
-  --preset examples/presets/structure-entropy-fast.json \
-  --range 0x0:0x200 \
-  --output-format json
-```
+- Discover currently surveys a declared 256 KiB exact prefix by default.
+- One contiguous analysis request is capped at 64 MiB; larger sources use
+  bounded reads, tiled overviews, explicit sampling, and exact focus ranges.
+- Only selected analytical kernels currently execute through WGPU. Many
+  analyzers and video rendering paths remain deterministic CPU work.
+- Native sandboxing, complete keyboard/accessibility acceptance, installable
+  third-party plugins, Intel support, and automatic updates are not complete.
+- Signature and statistical labels are candidate evidence, never automatic
+  safety, format, encryption, or compression verdicts.
 
-Machine-readable output excludes source paths and includes source digests,
-covered ranges, presets, and canonical artifact digests.
+Read the maintained
+[implementation status](docs/20-implementation-status.md) before using Strata
+with hostile, proprietary, or sensitive material.
 
-## Extend Strata
+## Privacy and evidence
 
-Contributions and experimental forks are welcome. The most useful extension
-points are:
+- Local sources are opened read-only and are never uploaded by Strata.
+- Strata has no telemetry or cloud-analysis dependency.
+- Portable `.strata-session` bundles exclude source bytes and local paths.
+- Private `.strata-project` files may contain local paths and are ignored by
+  Git.
+- Screenshots, videos, and exports can reveal source-derived structure; review
+  them before sharing.
 
-- `crates/strata-analysis` — deterministic CPU analyzers and discovery
-  findings.
-- `crates/strata-views` — projection mappings with source-range round trips.
-- `crates/strata-gpu` — bounded WGPU kernels with mandatory CPU differential
-  tests and fallback.
-- `crates/strata-runtime` — shared planning, budgets, and artifact orchestration.
-- `schemas/` and `wit/` — versioned interchange and future plugin contracts.
-- `fixtures/` — tiny deterministic, redistributable examples with digests and
-  expected properties.
-- `examples/video/` — programmable camera, projection, morph, and evidence
-  narratives.
+Strata analyzes attacker-controlled input and has not been independently
+audited. See [SECURITY.md](SECURITY.md) for the current trust boundary and
+responsible disclosure process.
 
-Third-party plugin installation is not enabled yet; the current extension path
-is a source contribution or fork. New analyses must remain deterministic,
-resource bounded, and traceable to exact or explicitly sampled source ranges.
+## Contributing and extending
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md), the
-[architecture](docs/01-architecture.md), and the
-[implementation status](docs/20-implementation-status.md).
+Contributions and experimental forks are welcome. New analyses should remain
+deterministic, resource-bounded, and traceable to exact or explicitly sampled
+source ranges. Third-party plugin installation is not enabled yet; the current
+extension path is a source contribution or fork.
 
-## Architecture at a glance
-
-```mermaid
-flowchart LR
-    A[macOS workbench / CLI] --> B[bounded shared runtime]
-    B --> C[immutable byte sources]
-    B --> D[deterministic CPU analyzers]
-    B --> E[verified WGPU compute]
-    D --> F[provenance-bearing artifacts]
-    E --> F
-    F --> G[linked views and exact picking]
-    G --> H[source-free sessions and exports]
-```
-
-The [documentation index](docs/INDEX.md) covers the product model, algorithms,
-GPU pipeline, interaction model, sessions, security, performance budgets,
-plugin direction, and roadmap. The
-[GUI reference](docs/21-gui-reference.md) separates the current executable
-baseline from the target workbench hierarchy and its layout invariants.
-
-## Project status
-
-Strata 0.1.0 is the first public pre-alpha preview. The working path includes
-the desktop workbench, CLI, linked 2D/3D projections, bounded large-file access,
-selected Metal compute, deterministic sessions, signature knowledge, and video
-programs. Native sandboxing, installable third-party plugins, broader GPU
-coverage, update delivery, Intel support, and a stable compatibility promise
-remain future work.
-
-See the [changelog](CHANGELOG.md), [roadmap](docs/11-roadmap.md), and
-[maintained implementation status](docs/20-implementation-status.md).
-
-## Community
-
-- Use [GitHub Discussions](https://github.com/a-Gb/strata/discussions) for ideas,
-  projection design, and format-research questions.
-- Use [GitHub Issues](https://github.com/a-Gb/strata/issues) for reproducible
-  bugs and focused feature proposals.
-- Use [private vulnerability reporting](https://github.com/a-Gb/strata/security/advisories/new)
-  for security-sensitive reports. Never attach proprietary binaries, private
-  paths, credentials, or live malware to a public issue.
+- [Contributing guide](CONTRIBUTING.md)
+- [Documentation index](docs/INDEX.md)
+- [Architecture](docs/01-architecture.md)
+- [GUI reference](docs/21-gui-reference.md)
+- [Roadmap](docs/11-roadmap.md)
 
 ## License
 
 Strata source code and documentation are available under either the
-[Apache License 2.0](LICENSE-APACHE) or [MIT license](LICENSE-MIT), at your
+[Apache License 2.0](LICENSE-APACHE) or [MIT License](LICENSE-MIT), at your
 option. Synthetic fixtures are dedicated under
 [CC0 1.0 Universal](fixtures/LICENSE-CC0).
